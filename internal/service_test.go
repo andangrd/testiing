@@ -18,7 +18,6 @@ func AddCounterTest(t *testing.T) {
 	t.Logf("HelloCount : %d", result)
 
 	t.Run("success", func(t *testing.T) {
-
 		assert.Equal(t, result, expectedResult)
 	})
 }

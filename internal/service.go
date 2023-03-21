@@ -21,8 +21,8 @@ func ProvideService(counter int) *Service {
 }
 
 func (s *Service) SayHello(counter int) string {
-	// newVal := s.AddCounter(counter)
-	return fmt.Sprintf("%s%s", strings.Repeat("Hello ", counter), "World!")
+	newVal := s.AddCounter(counter)
+	return fmt.Sprintf("%s%s", strings.Repeat("Hello ", newVal), "World!")
 }
 
 func (s *Service) AddCounter(param int) int {
