@@ -3,8 +3,6 @@ package internal
 import (
 	"fmt"
 	"strings"
-
-	"github.com/gocraft/web"
 )
 
 type ServiceImpl struct {
@@ -12,7 +10,7 @@ type ServiceImpl struct {
 }
 
 type Service interface {
-	SayHello(rw web.ResponseWriter, req *web.Request)
+	SayHello(counter int) string
 }
 
 func ProvideService(counter int) *ServiceImpl {
@@ -21,6 +19,11 @@ func ProvideService(counter int) *ServiceImpl {
 	}
 }
 
-func (s *ServiceImpl) SayHello(rw web.ResponseWriter, req *web.Request) {
-	fmt.Fprint(rw, strings.Repeat("Hello ", s.HelloCount), "World!")
+func (s *ServiceImpl) SayHello(counter int) string {
+	// newVal := s.AddCounter(counter)
+	return fmt.Sprintf("%s%s", strings.Repeat("Hello ", counter), "World!")
+}
+
+func (s *ServiceImpl) AddCounter(param int) int {
+	return s.HelloCount + param
 }

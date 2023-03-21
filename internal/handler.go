@@ -2,13 +2,13 @@ package internal
 
 import (
 	"fmt"
-	"strings"
+	"strconv"
 
 	"github.com/gocraft/web"
 )
 
 type HandlerImpl struct {
-	HelloCount int
+	Service Service
 }
 
 type Handler interface {
@@ -16,11 +16,20 @@ type Handler interface {
 }
 
 func ProvideHandler(counter int) *HandlerImpl {
+
+	svc := ProvideService(counter)
 	return &HandlerImpl{
-		HelloCount: counter,
+		Service: svc,
 	}
 }
 
 func (s *HandlerImpl) SayHello(rw web.ResponseWriter, req *web.Request) {
-	fmt.Fprint(rw, strings.Repeat("Hello ", s.HelloCount), "World!")
+	counterStr := req.PathParams["counter"]
+	counter, _ := strconv.Atoi(counterStr)
+	if counter == 0 {
+		counter = 3
+	}
+	result := s.Service.SayHello(counter)
+
+	fmt.Fprint(rw, result)
 }
