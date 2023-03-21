@@ -19,7 +19,7 @@ func ProvideHandler(counter int) *HandlerImpl {
 
 	svc := ProvideService(counter)
 	return &HandlerImpl{
-		Service: svc,
+		Service: *svc,
 	}
 }
 

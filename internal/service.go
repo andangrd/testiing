@@ -5,25 +5,26 @@ import (
 	"strings"
 )
 
-type ServiceImpl struct {
+type Service struct {
 	HelloCount int
 }
 
-type Service interface {
+type ServiceImpl interface {
 	SayHello(counter int) string
+	AddCounter(param int) int
 }
 
-func ProvideService(counter int) *ServiceImpl {
-	return &ServiceImpl{
+func ProvideService(counter int) *Service {
+	return &Service{
 		HelloCount: counter,
 	}
 }
 
-func (s *ServiceImpl) SayHello(counter int) string {
+func (s *Service) SayHello(counter int) string {
 	// newVal := s.AddCounter(counter)
 	return fmt.Sprintf("%s%s", strings.Repeat("Hello ", counter), "World!")
 }
 
-func (s *ServiceImpl) AddCounter(param int) int {
+func (s *Service) AddCounter(param int) int {
 	return s.HelloCount + param
 }
