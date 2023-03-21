@@ -1,4 +1,4 @@
-module sharing/test1
+module github.com/andangrd/testiing
 
 go 1.19
 
